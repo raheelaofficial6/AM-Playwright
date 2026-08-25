@@ -28,11 +28,6 @@ export class FunnelPage {
       name: "View Ideas",
     });
 
-    // The app now autosaves this page (confirmed live: no "Save" button
-    // exists at all anymore) — clicking "Create idea funnel" immediately
-    // creates a draft funnel and lands on its full settings page, and typing
-    // the title triggers autosave via this status control, which cycles
-    // "Saving..." -> "Saved" -> disappears within a few seconds.
     this.savingStatus = page
       .locator("button")
       .filter({ hasText: /Saving|Saved/i })
@@ -43,7 +38,6 @@ export class FunnelPage {
     const funnelName = generateRandomName("Funnel");
     const duplicateToast = this.page.getByText(/already exists/i);
 
-    await this.toolsButton.waitFor({ state: "visible" });
     await this.toolsButton.click();
     await this.funnelsLink.click();
     await this.createIdeaFunnelLink.waitFor({ state: "visible" });
